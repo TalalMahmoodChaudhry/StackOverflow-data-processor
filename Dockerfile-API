@@ -1,0 +1,19 @@
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8 AS build
+
+ENV PYTHONPATH "${PYTHONPATH}:/app"
+
+RUN pip install --upgrade pip
+
+WORKDIR /app/
+
+COPY api/requirements.txt requirements.txt
+RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt
+
+COPY api/ api/
+COPY database/ database/
+COPY schemas/ schemas/
+COPY constants.py .
+COPY file_operations.py .
+COPY import_helpers.py .
+
+ENTRYPOINT ["python", "-m", "api.app"]
