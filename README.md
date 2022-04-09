@@ -116,6 +116,16 @@ pass: admin
 
 Now you can see DB details and do sql queries
 
+## Running tests
+Tests for both processor and api are run together. So installing dependencies is required (if not done so)
+```commandline
+pip install -r requirements.txt -r api/requirements.txt
+```
+Then run tests using
+```
+python -m pytest
+```
+
 ## Test project vs Production
 This is just a test project. The files are read line-by-line to simulate "stream events". Data 
 is stored in tables, and then later transformed in SQL and updated in `users` table with total
